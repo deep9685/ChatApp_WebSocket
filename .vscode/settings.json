@@ -1,0 +1,11 @@
+{
+    "multiCommand.commands": [
+    {
+        "command": "multiCommand.saveAndFormat",
+        "sequence": [
+            "editor.action.formatDocument",
+            "workbench.action.files.save"
+        ]
+    }
+]
+}
