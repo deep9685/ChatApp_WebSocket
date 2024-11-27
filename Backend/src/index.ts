@@ -26,20 +26,41 @@ wss.on("connection", (socket) => {
             console.log("Room create request");
             const roomNumber = generateRandomNumber();
             allSockets[roomNumber] = [];
-            socket.send(`Room is created Successfully, RoomId: ${roomNumber}`);
+
+            const response = {
+                type:"create",
+                message: "Room is created successfully",
+                roomId: roomNumber,
+            }
+            socket.send(JSON.stringify(response));
         }
 
         if(parsedMessage.type == "join"){
             console.log("Room join request")
             if(!allSockets[parsedMessage?.payload?.roomId]){
-                socket.send("Invalid Room Id!!");
+                const response = {
+                    type:"join",
+                    status:404,
+                    message:"Invalid Room Id!!"
+                }
+                socket.send(JSON.stringify(response));
             }
             else if(isAlreadyJoined(socket, parsedMessage?.payload?.roomId)){
-                socket.send("You have already joined this room");
+                const response = {
+                    type:"join",
+                    status:400,
+                    message:"You have already joined this room"
+                }
+                socket.send(JSON.stringify(response));
             }
             else{
                 allSockets[parsedMessage?.payload?.roomId].push(socket);
-                socket.send("Room joined Successfully");
+                const response = {
+                    type:"join",
+                    status:200,
+                    message:"Room joined Successfully"
+                }
+                socket.send(JSON.stringify(response));
             }
         }
 
