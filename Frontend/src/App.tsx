@@ -56,6 +56,7 @@ function App() {
           toast.error(data?.message)
         }else if(data?.status === 200){
           toast.success(data?.message)
+          closeJoinRoomModal();
         }
         else{
           toast.error("Something went wrong!");
@@ -88,7 +89,15 @@ function App() {
             </button>
           </div>
 
-          <div></div>
+          <div className="w-3/5 h-[380px] bg-white mx-auto rounded-md">
+          <div>
+
+          </div>
+          <div className="flex items-center">
+            <input className="bg-slate-300 m-1 w-4/5 rounded-md px-6 py-2 border-2 border-slate-800"/>
+            <button className="py-2 px-4 bg-blue-700 hover:bg-blue-600 text-white font-mono rounded-md text-xl">Send</button>
+          </div>
+          </div>
         </div>
       </div>
 
